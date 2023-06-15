@@ -3,7 +3,7 @@
 let superheros;
 fetch("superherodata.txt")
   .then((rawData) => rawData.text())
-  .then((strData) => (superhero = strData.split(/\r?\n/)));
+  .then((strData) => (superheros = strData.split(/\r?\n/)));
 
 // Output
 let outputEl = document.getElementById("output");
@@ -34,42 +34,40 @@ function traverseDisplayAll() {
   // Output Results
   outputEl.innerHTML = "";
   for (let i = 0; i < superheros.length; i++) {
-    outputEl.innerHTML += `<p>${superheros[i]}</p>`;
+    outputEl.innerHTML += `<p>${i}: ${superheros[i]}</p>`;
   }
 }
 
 function traverseDisplayRandom() {
   // Input
-  let first = document.getElementById("first").value;
-  let last = document.getElementById("last").value;
 
   // Output Results
   outputEl.innerHTML = "";
-  let randNickname = randomElement(nicknames);
-  outputEl.innerHTML += `<p>${first} "${randNickname}" ${last}</p>`;
+  let randSuperhero = randomElement(superheros);
+  outputEl.innerHTML += `<p>"${randSuperhero}"</p>`;
 }
 
 function traverseAdd() {
   // Input
   outputEl.innerHTML = "";
-  let newNickname = prompt("Enter a new nickname: ");
+  let newSuperhero = prompt("Enter a new superhero: ");
 
-  outputEl.innerHTML += `<p>Added Nickname: ${newNickname}`;
-  nicknames.push(newNickname);
+  outputEl.innerHTML += `<p>Added Nickname: ${newSuperhero}`;
+  superheros.push(newSuperhero);
 }
 
 function traverseRemoveLast() {
   // Input
-  let last = nicknames.pop();
-  outputEl.innerHTML = `<p>Last Nickname Removed: ${last}`;
+  let last = superheros.pop();
+  outputEl.innerHTML = `<p>Last Superhero Removed: ${last}`;
 }
 
 function traverseRemoveIndex() {
   // Input
   let index = +prompt("Enter a number");
-  if (index >= 0 && index < nicknames.length) {
-    let nicknameindex = nicknames.splice(index, 1);
-    outputEl.innerHTML = `<p>Nickname Remove at index ${index}: ${nicknameindex}`;
+  if (index >= 0 && index < superheros.length) {
+    let superheroindex = superheros.splice(index, 1);
+    outputEl.innerHTML = `<p>Nickname Remove at index ${index}: ${superheroindex}`;
   } else {
     outputEl.innerHTML = `<p>Invalid Index`;
   }
